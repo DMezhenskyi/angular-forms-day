@@ -28,10 +28,6 @@ export class RatingPickerComponent {
   @Output()
   change = new EventEmitter<RatingOptions>();
 
-  @Input()
-  @HostBinding('attr.tabIndex')
-  tabIndex = 0;
-
   setValue(value: RatingOptions) {
     this.value = value;
   }
