@@ -14,12 +14,20 @@
   --font-size-h1: 34px;
 }
 
-body, html, p, h1, h2, h3, h4, h5, span {
+body,
+html,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+span {
   padding: 0;
   margin: 0;
 }
 body {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   background-color: var(--color-background);
 }
 
@@ -41,7 +49,10 @@ form {
   max-width: 450px;
 }
 
-label, input, fieldset, button {
+label,
+input,
+fieldset,
+button {
   width: 100%;
   box-sizing: border-box;
 }
@@ -76,7 +87,9 @@ legend {
   font-weight: bold;
 }
 
-input, button, select {
+input,
+button,
+select {
   border-radius: 5px;
   font-size: 18px;
   padding: 10px 11px;
@@ -85,3 +98,9 @@ input, button, select {
 select {
   width: 100%;
 }
+// .ng-invalid:not(form.ng-invalid) {
+//   border: 1px solid red;
+// }
+// .ng-valid:not(form.ng-valid) {
+//   border: 1px solid green;
+// }
