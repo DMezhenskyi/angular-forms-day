@@ -1,0 +1,10 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <app-rating-picker value="good" [disabled]="false" />
+  <input
+    formControlName="feedback"
+    type="text"
+    placeholder="You Feedback..."
+    style="margin-top: 15px"
+  />
+  <button>Submit</button>
+</form>
