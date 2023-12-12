@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-forms-page',
@@ -16,9 +21,16 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ReactiveFormsPageComponent implements OnInit {
   form = new FormGroup({
-    displayName: new FormControl(''),
-    nickname: new FormControl(''),
-    email: new FormControl(''),
+    displayName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    nickname: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.pattern(/^[\w.]+$/),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     yearOfBirth: new FormControl(1991),
     passportNumber: new FormControl<number | null>(null),
     address: new FormGroup({
