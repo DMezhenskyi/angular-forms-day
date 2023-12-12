@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { banWords } from '../../../core/validators/ban-words.validator';
 
 @Component({
   selector: 'app-reactive-forms-page',
@@ -24,11 +25,13 @@ export class ReactiveFormsPageComponent implements OnInit {
     displayName: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
+      banWords(['test'])
     ]),
     nickname: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
       Validators.pattern(/^[\w.]+$/),
+      banWords(['test', 'anonymous'])
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
     yearOfBirth: new FormControl(1991),

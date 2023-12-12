@@ -14,6 +14,9 @@
       @if (this.form.get('displayName')?.hasError('minlength')) {
         <div class="input-error">This field is too short</div>
       }
+      @if (this.form.get('displayName')?.hasError('banWords')) {
+        <div class="input-error">This word is not allowed</div>
+      }
     }
   </div>
   <div class="form-field">
@@ -33,6 +36,9 @@
       }
       @if (this.form.get('nickname')?.hasError('pattern')) {
         <div class="input-error">Only letters, numbers and _ is allowed</div>
+      }
+      @if (this.form.get('displayName')?.hasError('banWords')) {
+        <div class="input-error">This word is not allowed</div>
       }
     }
   </div>
