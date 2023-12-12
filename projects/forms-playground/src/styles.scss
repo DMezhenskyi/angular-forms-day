@@ -98,9 +98,34 @@ select {
 select {
   width: 100%;
 }
+
+@keyframes input-message-animation {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@mixin input-message() {
+  font-size: 12px;
+  box-sizing: border-box;
+  padding: 2px 13px;
+  animation-name: input-message-animation;
+  animation-duration: 300ms;
+}
+
+.input-error {
+  @include input-message();
+  color: red;
+}
+
 .ng-invalid:not(form.ng-invalid).ng-dirty {
   border: 2px solid red;
 }
 .ng-valid:not(form.ng-valid).ng-dirty {
   border: 2px solid green;
 }
+
