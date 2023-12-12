@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { banWords } from '../../../core/validators/ban-words.validator';
 import { NicknameCheckerValidator } from '../../../core/validators/nickname-checker.validator';
+import { startWith, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reactive-forms-page',
@@ -64,5 +65,23 @@ export class ReactiveFormsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.get('nickname')?.statusChanges.subscribe(() => this.cdr.markForCheck())
+    this.form.controls.yearOfBirth.valueChanges
+      .pipe(
+        tap(() => this.form.controls.passportNumber.markAsDirty()),
+        startWith(this.form.controls.yearOfBirth.value),
+        )
+      .subscribe((yearOfBirth) => {
+        this.isAdult(yearOfBirth)
+          ? this.form.controls.passportNumber.addValidators(Validators.required)
+          : this.form.controls.passportNumber.removeValidators(Validators.required);
+        this.form.controls.passportNumber.updateValueAndValidity();
+      });
+  }
+  private isAdult(yearOfBirth: number | null): boolean {
+    if (!yearOfBirth) {
+      return false;
+    }
+    const currentYear = new Date().getFullYear();
+    return currentYear - yearOfBirth >= 18;
   }
 }
