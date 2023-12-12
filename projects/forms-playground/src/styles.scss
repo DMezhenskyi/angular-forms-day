@@ -129,3 +129,8 @@ select {
   border: 2px solid green;
 }
 
+button[disabled] {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}

@@ -40,7 +40,9 @@ export class ReactiveFormsPageComponent implements OnInit {
     }),
   });
   onSubmit() {
-    console.log(this.form.getRawValue());
+    if (!this.form.invalid) {
+      console.log(this.form.getRawValue());
+    }
   }
 
   get years() {
