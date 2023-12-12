@@ -88,35 +88,6 @@
           }
         }
       }
-    },
-    "custom-form-controls": {
-      "projectType": "library",
-      "root": "projects/custom-form-controls",
-      "sourceRoot": "projects/custom-form-controls/src",
-      "prefix": "cfc",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/custom-form-controls/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/custom-form-controls/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/custom-form-controls/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "no-cache": true
-          }
-        }
-      }
     }
   }
 }
