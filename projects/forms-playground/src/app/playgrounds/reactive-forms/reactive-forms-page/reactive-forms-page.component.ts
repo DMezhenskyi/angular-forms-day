@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { banWords } from '../../../core/validators/ban-words.validator';
+import { NicknameCheckerValidator } from '../../../core/validators/nickname-checker.validator';
 
 @Component({
   selector: 'app-reactive-forms-page',
@@ -21,18 +22,24 @@ import { banWords } from '../../../core/validators/ban-words.validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReactiveFormsPageComponent implements OnInit {
+  nicknameChecker = inject(NicknameCheckerValidator);
+  cdr = inject(ChangeDetectorRef);
   form = new FormGroup({
     displayName: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
       banWords(['test'])
     ]),
-    nickname: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.pattern(/^[\w.]+$/),
-      banWords(['test', 'anonymous'])
-    ]),
+    nickname: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(/^[\w.]+$/),
+        banWords(['test', 'anonymous']),
+      ],
+      asyncValidators: [this.nicknameChecker.validate.bind(this.nicknameChecker)],
+      updateOn: 'blur'
+    }),
     email: new FormControl('', [Validators.required, Validators.email]),
     yearOfBirth: new FormControl(1991),
     passportNumber: new FormControl<number | null>(null),
@@ -55,5 +62,7 @@ export class ReactiveFormsPageComponent implements OnInit {
       .map((_, idx) => now - idx);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form.get('nickname')?.statusChanges.subscribe(() => this.cdr.markForCheck())
+  }
 }

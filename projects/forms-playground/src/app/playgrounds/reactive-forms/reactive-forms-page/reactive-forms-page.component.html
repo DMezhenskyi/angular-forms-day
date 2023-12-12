@@ -37,8 +37,11 @@
       @if (this.form.get('nickname')?.hasError('pattern')) {
         <div class="input-error">Only letters, numbers and _ is allowed</div>
       }
-      @if (this.form.get('displayName')?.hasError('banWords')) {
+      @if (this.form.get('nickname')?.hasError('banWords')) {
         <div class="input-error">This word is not allowed</div>
+      }
+      @if (this.form.get('nickname')?.hasError('uniqueName')) {
+        <div class="input-error">This nickname is already taken</div>
       }
     }
   </div>
