@@ -23,5 +23,9 @@ export class RatingPickerPageComponent implements OnInit {
     console.log(this.form.getRawValue());
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // uncomment a string bellow to see how UI reacts on disabled state of the model.
+
+    // this.form.controls.rating.disable()
+  }
 }

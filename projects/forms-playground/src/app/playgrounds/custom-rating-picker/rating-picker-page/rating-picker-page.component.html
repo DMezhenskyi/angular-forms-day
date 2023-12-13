@@ -1,5 +1,5 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-  <app-rating-picker value="good" [disabled]="false" />
+  <app-rating-picker formControlName="rating" value="good" />
   <input
     formControlName="feedback"
     type="text"
